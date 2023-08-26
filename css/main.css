@@ -8,46 +8,153 @@
     box-sizing: border-box;
 }
 
+:root {
+    --z-index-main-content: 2;
+}
+
 body {
     align-items: center;
     background-color: black;
     color: white;
     display: flex;
+    flex-flow: column;
     font-family: Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
-    height: 100vh;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0;
 }
 
-.main {
-    position: relative;
-    z-index: 2;
+img {
+    max-width: 100%;
 }
 
-.title {
-    font-size: 4.5rem;
-    margin: .5rem;
+a {
+    color: #6AB6BA;
 }
 
-.position {
+strong {
+    color: #FFB039;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hero {
+    align-items: center;
+    display: flex;
     font-size: 2rem;
-    margin: .2rem;
+    height: 100vh;
+    justify-content: center;
+    padding: 1em;
+    position: relative;
+    width: 100%;
+    z-index: var(--z-index-main-content);
+}
+
+@supports (animation-timeline: scroll()) {
+    .hero {
+        animation: hero-animation linear forwards;
+        animation-range-end: 50vh;
+        animation-timeline: scroll();
+    }
+}
+
+.hero__title {
+    font-size: calc(1vw + 1em);
+    margin: 1vw 0 0 0;
+    position: sticky;
+}
+
+.hero__position {
+    font-size: calc(1vw + 1.5em);
+    margin: 0;
 }
 
 .bg {
     height: 100vh;
     left: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
-    width: 100vw;
+    width: 100%;
     z-index: 1;
 }
 
 .bg__picture {
-    opacity: 30%;
     filter: grayscale(100%);
+    opacity: 20%;
     height: 100%;
     object-fit: cover;
     width: 100%;
+}
+
+@supports (animation-timeline: scroll()) {
+    .bg__picture {
+        animation: bg-picture-animation linear forwards;
+        animation-range-end: 30vh;
+        animation-timeline: scroll();
+        opacity: 30%;
+    }
+}
+
+.main {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    max-width: 100%;
+    padding: .8em;
+    width: 1100px;
+    z-index: var(--z-index-main-content);
+}
+
+.main p {
+    margin: 1.5em 0;
+}
+
+.section {
+    margin-bottom: 5em;
+}
+
+.section--featured {
+    background-color: #3e3e3e;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.title {
+    font-size: 1.5em;
+}
+
+@keyframes bg-picture-animation {
+	from {
+        opacity: 0.3;
+	}
+	to {
+        opacity: 0.05;
+	}
+}
+
+@keyframes hero-animation {
+	from {
+       opacity: 1;
+	}
+	to {
+        opacity: 0;
+	}
+}
+
+@media (min-width: 1180px) {
+
+    .hero__title {
+        font-size: calc(1vw + 2em);
+    }
+    
+    .hero__position {
+        font-size: calc(1vw + 1em);
+    }
+
+    .main {
+        font-size: 2rem;
+        line-height: 2.8rem;
+    }
+
 }
